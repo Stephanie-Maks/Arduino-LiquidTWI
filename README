@@ -1,0 +1,48 @@
+For more information, see the threads at Adafruit forums, here:
+http://forums.adafruit.com/viewtopic.php?f=19&t=21586
+	and here:
+http://forums.adafruit.com/viewtopic.php?f=22&t=25656
+
+
+LiquidTWI High Performance i2c LCD driver
+by Matt Falcon (FalconFour) / http://falconfour.com
+modified by Stephanie Maks / http://planetstephanie.net
+Adapted and optimized from LiquidCrystal bundled with Arduino
+
+Version 1.2
+
+Changelog:
+* 1.2 / January 2012
+  Modified by Stephanie Maks to re-introduce legacy support along with
+  support for the new Arduino 1.0 IDE.
+* 1.1.s / December 2011:
+  Modified by Stephanie Maks to drop legacy support and work with the
+  Arduino 1.0 IDE. Also includes the bugfix for the startup/init problem.
+* 1.1 / 6-17-2011:
+  Oops... initial bugchecking was done on one program (performance test).
+  LCD_DISPLAYCONTROL functions were sending bit 7 (backlight) to the LCD as
+  part of the command, invalidating most commands and setting the cursor to
+  address 0 instead of doing their function. That also screwed up the
+  initialization routine something fierce. A miracle this slipped by testing.
+* 1.0 / 6-12-2011:
+  Initial release
+
+Distributed with as free-will a license as is available given this code's long
+associative chain of licenses (LiquidCrystal -> Arduino -> Wiring -> ...?). Use
+it in any way you feel fit, profit or free, provided it fits in the licenses of
+its associated works.
+
+Usage:
+Attach CLK pin to ANALOG 5 pin (remember: analog pins double as digital!),
+Attach DAT pin to ANALOG 4 pin,
+Give it 5V using    5V     pin,
+Then,  GND it with  GND    pin, and you're all set!
+
+LiquidTWI lcd(0);
+void setup() { lcd.begin(16,2); }
+void loop() { lcd.print("Happy!"); delay(500); lcd.clear(); delay(500); }
+
+If you changed the i2c address of the board (multiple LCDs? I dig it!), set
+"lcd(0)" to your new 3-bit address.
+If you have more than a 16x2 LCD, change "lcd.begin(16,2)" to reflect the
+columns and rows of your LCD.
